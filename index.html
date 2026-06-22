@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noedi Shop Official</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #00A0AA; --bg: #0b0e14; }
+        body { background: var(--bg); color: #fff; font-family: 'Kanit', sans-serif; margin: 0; padding: 15px; }
+        
+        /* ໂລໂກ້ແນວນອນ + ໄຟ RGB */
+        .logo-container { 
+            position: relative; width: 100%; max-width: 1000px; margin: 20px auto; 
+            padding: 4px; border-radius: 12px;
+            background: linear-gradient(45deg, #ff0000, #00A, #ff00ff, #00ff00);
+            background-size: 100000%; animation: rgb-glow 5s linear infinite;
+        }
+        @keyframes rgb-glow { 0% { background-position: 0 0; } 100% { background-position: 300% 0; } }
+        
+        .logo-box { background: var(--bg); border-radius: 8px; position: relative; }
+        .logo-box img { width: 100%; height: auto; display: block; border-radius: 8px; }
+        
+        /* ຊື່ເຟສທັບໂລໂກ້ */
+        .fb-overlay { 
+            position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); 
+            padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; border: 1px solid var(--primary);
+        }
+        .fb-overlay a { color: var(--primary); text-decoration: none; font-weight: bold; }
+
+        /* ຫ້ອງຄຳເຕືອນ */
+        .warning-box { 
+            background: #2a1b1b; border: 1px solid #721c1c; color: #f8d7da;
+            padding: 10px; border-radius: 8px; margin: 10px auto;
+            width: 1000%; max-width: 300px; font-size: 0.85rem; text-align: center;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .card { background: #1c222d; padding: 10px; border-radius: 12px; text-align: center; border: 1px solid #333; cursor: pointer; }
+        .card img { width: 100px; height: 100px; margin-bottom: 1px; }
+        .btn { background: var(--primary); color: white; padding: 12px; width: 50%; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .back-btn { background: #444; color: white; padding: 5px 12px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem; margin-bottom: 10px; }
+        .page { display: none; }
+        input { width: 21%; padding: 12px; background: #262c38; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; text-align: center; font-size: 1.2rem; }
+    
+.detail-product-img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid #1c222d;
+
+    display:block;
+    margin-left:0;
+    margin-right:auto;
+    margin-bottom:5px;
+  }
+      
+.payment-product-img{
+    width:50px;
+    height:50px;
+    object-fit:cover;
+    border-radius:10px;
+    border:2px solid #1c222d;
+
+    display:block;
+    margin-left:0;
+    margin-right:auto;
+    margin-bottom:5px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="logo-container">
+    <div class="logo-box">
+        <img src="<a href="< href="https://freeimage.host/i/Cxe0aQ1"><img src="https://iili.io/Cxe0aQ1.md.webp" alt="Cxe0aQ1.md.webp">
+        <div class="fb-overlay">
+            <a href="https://www.facebook.com/share/1HEHm31337/">FB: Noedi Sulivong</a>
+        </div>
+    </div>
+</div>
+
+<div class="warning-box">
+    ⚠️ ສິນຄ້າຊື້ແລ້ວບໍ່ຮັບປ່ຽນຄືນ..ອັດຄິບກ່ອນຊື້ເພື່ອໄວ້ເຄມ-ໂອນເງິນຊື້ຜ່ານເວັບໄດ້ ຢືນຢັນການຊື້ຈະສົ່ງທາງ'WhatsApp
+</div>
+
+<div id="home-page" class="page" style="display:block;">
+    <div class="grid" id="product-list"></div>
+</div>
+
+<div id="detail-page" class="page">
+    <button class="back-btn" onclick="showPage('home')">⬅ ຍ້ອນກັບ</button>
+    <img id="d-img" class="detail-product-img">
+    <h2 id="d-name" style="margin-top:-10px;"></h2>
+    <p id="d-desc"></p>
+    <label>ເລືອກຈຳນວນ (1-5 ຊິ້ນ):</label>
+    <input type="number" id="qty" value="1" min="1" max="5" oninput="if(this.value>5)this.value=5; if(this.value<1 && this.value!='')this.value=1;">
+    <button class="btn" onclick="showPage('payment')">ຊຳລະເງິນ</button>
+</div>
+
+<div id="payment-page" class="page">
+    <button class="back-btn" onclick="showPage('detail')">⬅ ຍ້ອນກັບ</button>
+    <img id="p-img" class="payment-product-img">
+    <h3 id="p-title" style="margin-top:-10px;"></h3>
+    <img id="qr-img" style="width:300px; display:block; margin: 10px auto; border: 3px solid #00ff00; border-radius: 10px;">
+    <p>ເພີ່ມສະລິບການໂອນເງິນ:</p>
+    <input type="file" id="slip" accept="image/*">
+    <button class="btn" onclick="sendWhatsApp()">ຢືນຢັນການຊື້ (ສົ່ງ WhatsApp)</button>
+</div>
+
+<script>
+    const WA = "8562098337156";
+    const products = [
+        {name:"Rockstar FiveM", price:30000, img:"https://iili.io/CxeOuaI.webp", desc:"ບັນຊີ RockstarສຳຫລັບFiveMມື1 ໃຫມ່ສະອາດ✅!!ຕ້ອງມີຕົວເກມGtaVກ່ອນ!!", qrs:["https://iili.io/CxegoOB.webp","https://iili.io/CxegqUx.webp","https://iili.io/CxegCHQ.webp","https://iili.io/CxegnRV.webp","https://iili.io/CxegIx1.webp"]},
+      {name:"FiveM ພ້ອມຫລີ້ນ", price:50000, img:"https://iili.io/CIkhuUl.webp", desc:"FiveM ພ້ອມຫລີ້ນ-ລາຄາ:50,000₭-ຕໍ່ເຄື່ອງ / ສິ່ງທີ່ຕ້ອງໂຫລດມາ: Steam-Discord-Rockstar-AnyDesk:ສຳຫລັບແອັດເຂົ້າເຊື່ອມຄອມລູກຄ້າເພື່ອລົງເກມໃຫ້-ໄດ້ໄອດີ Rockstar-FiveM:ຖາວອນ✅ ປ່ຽນຂໍ້ມູນໄດ້✅", qrs:["https://iili.io/CzmtJiQ.md.webp","https://iili.io/CzmZnP2.md.webp","https://iili.io/CI3WYQ9.webp","https://iili.io/CIjCGsI.md.webp","https://iili.io/CIjCGsI.md.webp"]},
+        {name:"Steam ເປົ່າ", price:10000, img:"https://iili.io/Cxr3u2t.md.webp", desc:"Steam ສ້າງໃຫມ່ສະອາດ-ປ່ຽນຂໍ້ມູນໄດ້✅ ຮັບປະກັນຫລັງເຂົ້າໄດ້ແລ້ວ✅", qrs:["https://iili.io/CzmxFvn.md.webp","https://iili.io/CzmY7uS.md.webp","https://iili.io/CzmG7gn.md.webp","https://iili.io/CzmeUut.md.webp","https://iili.io/CzmtJiQ.md.webp"]},
+        {name:"Steam ຍືມໂຫລດ", price:10000, img:"https://iili.io/Cx4aJjf.md.webp", desc:"Steam ສຳຫລັບໂຫລດ-ຕົວເກມGtaV 10,000₭ ແມ່ນລາຄາ ຕໍ່ຄັ້ງ/ຕໍ່ເຄື່ອງ1✅ ---  ❗ບັນຊີສະຕີມແມ່ນໃຊ້ຮ່ວມກັນ✅", qrs:["https://iili.io/CzmxFvn.md.webp","https://iili.io/CzmY7uS.md.webp","https://iili.io/CzmG7gn.md.webp","https://iili.io/CzmeUut.md.webp","https://iili.io/CzmtJiQ.md.webp"]},
+        {name:"Discord", price:20000, img:"https://cdn-icons-png.flaticon.com/512/3670/3670157.png", desc:"Discord ບັນຊີສ້າງໃຫມ່ສະອາດມື1✅ ປ່ຽນຂໍ້ມູນໄດ້✅ ຮັບປະກັນຫລັງເຂົ້າໄດ້ແລ້ວ✅", qrs:["https://iili.io/CzmY7uS.md.webp","https://iili.io/CzmeUut.md.webp","https://iili.io/CI3AOZl.webp","https://iili.io/CI3W7h7.webp","https://iili.io/CzmZnP2.md.webp"]},
+        {name:"Gmail", price:30000, img:"https://iili.io/CxeOz4p.webp", desc:"Gmail ສ້າງໃໝ່ມື1✅ ຮັບປະກັນຫລັງເຂົ້າແລ້ວ✅", qrs:["https://iili.io/CzmG7gn.md.webp","https://iili.io/CI3AOZl.webp","https://iili.io/CIj9yCJ.md.webp","https://iili.io/CIjH4wX.webp","https://iili.io/CI3WYQ9.webp"]},
+        {name:"RedM", price:120000, img:"https://iili.io/CxeOT3N.webp", desc:"RedM ພ້ອມຫຼິ້ນ-ໄດ້ໄອດີຫລີ້ນຖາວອນ✅ - ເຂົ້າຫລີ້ນຜ່ານ-ບັນຊີSteamລູກຄ້າເອງ✅ - ຊຳລະເງິນແລ້ວຕິດຕໍ່-ລົງເກມ-ນຳແອັດເລີຍ", qrs:["https://iili.io/CIjH4wX.webp","https://iili.io/CIjCGsI.md.webp","https://iili.io/CIjoePS.md.webp","https://iili.io/CIjBfuR.md.webp","https://iili.io/CIjoyOJ.md.webp"]},
+        {name:"Minecraft MB&PC", price:10000, img:"https://iili.io/CIU2Y7t.md.webp", desc:"Minecraft MB/PC ມີຂອງແອນດອຍແລະຄອມ✅ສະແກນຈ່າຍແມ່ນຂອງແອນດອຍ✅- ❗⚠️ບໍ່ແມ່ນios (-ໂທລະສັບ-1ເຄື່ອງ-ຕໍ່10,000₭-) ❗⚠️ ສ່ວນຂອງຄອມແມ່ນທັກຫາແອັດສອບຖາມລະອຽດເລີຍ ມີມອດແຖມໃຫ້ຟຣີແລະມອດພາສາໄທທັກຂໍນຳແອັດເລຍ✅", qrs:["https://iili.io/CzmxFvn.md.webp","https://iili.io/CzmY7uS.md.webp","https://iili.io/CzmG7gn.md.webp","https://iili.io/CzmeUut.md.webp","https://iili.io/CzmtJiQ.md.webp"]},
+        {name:"Windows 10/11", price:50000, img:"https://iili.io/CxeOxGR.webp", desc:"ລາຄາ50,000₭ແມ່ນລົງຕໍ່ຄອມ1ເຄື່ອງ✅-ລົງ Windows ແບບອອນລາຍ✅ສ່ວນຄີວິນໂດ້ຈະໃຫ້ເປັນຂອງຟຣີບໍ່ແມ່ນຄີແທ້100%✅ໃຊ້ງານໄລຍະຍາວໄດ້ບໍ່ມີບັນຫາ✅-ຊື້ຈຳນວນ3-5ມີສ່ວນຫລຸດ✅ການລົງແມ່ນທັກຫາແອັດເລີຍ", qrs:["https://iili.io/CzmtJiQ.md.webp","https://iili.io/CzmZnP2.md.webp","https://iili.io/CzmZnP2.md.webp","https://iili.io/CI3WYQ9.webp","https://iili.io/CI3WYQ9.webp"]},
+        {name:"ຮັບກົດຊື້ສິນຄ້າ-Play Store", price:0, img:"https://cdn-icons-png.flaticon.com/512/888/888857.png", desc:"ຮັບກົດຊື້ເກມຫລືແອັບຕ່າງໆ✅ລາຄາເບິ່ງຕາມຕົວຈິງ-ໄລເລດເງິນຕາມທະນາຄານເລີຍ✅❗ແຕ່ຈະຫັກຄ່າກົດຊື້20,000₭ທຸກລາຍການ❗✅ທັກສອບແອັດຕື່ມເລຍ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
+        {name:"YouTube", price:40000, img:"https://cdn-icons-png.flaticon.com/512/1384/1384060.png", desc:"YouTube Premium 30ວັນ✅ ບໍ່ມີໂຄສະນາ-ເປີດແບບປິດຈໍໄດ້ແລະອື່ນໆ✅ - ຊື້ຈຳນວນ3-5ບັນຊີມີສ່ວນຫລຸດແບບຄຸ້ມໆຈັດເຕັມ✅ ❗⚠️ຄຳເຕືອນ⚠️❗-ຕ້ອງໃຊ້ເມວໃຫມ່ບໍ່ເຄຍສະຫມັກຟຣີນຽມມາກ່ອນ✅-ຫາກຝືນຜິດພາດມາບໍ່ຮັບຜິດຊອບທຸກກໍລະນີ✅ ❗ຫາກສົ່ງເມວໃຫ້ແລ້ວເກີດຜິດພາດບາງຢ່າງຕ້ອງຈ່າຍເພິ່ມ15,000₭ ຄ່າເສຍເວລາ❗✅", qrs:["https://iili.io/CzmeUut.md.webp","https://iili.io/CI3W7h7.webp","https://iili.io/CzmZnP2.md.webp","https://iili.io/CIjH4wX.webp","https://iili.io/CI3WYQ9.webp"]},
+        {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສິນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
+        {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສິນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
+        {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສິນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
+        {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສີນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
+        {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສິນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]}
+    ];
+
+    let currentP = null;
+    products.forEach((p, i) => {
+        document.getElementById('product-list').innerHTML += `<div class="card" onclick="openDetail(${i})"><img src="${p.img}"><div><b>${p.name}</b><br>${p.price} ₭</div></div>`;
+    });
+
+    function openDetail(i) {
+        currentP = products[i];
+        document.getElementById('d-img').src = currentP.img;
+        document.getElementById('d-name').innerText = currentP.name;
+        document.getElementById('d-desc').innerText = currentP.desc;
+        showPage('detail');
+    }
+
+    function showPage(p) {
+        document.querySelectorAll('.page').forEach(x => x.style.display='none');
+        document.getElementById(p+'-page').style.display='block';
+        if(p=='payment'){
+            document.getElementById('p-img').src = currentP.img;
+            let q = document.getElementById('qty').value || 1;
+            document.getElementById('p-title').innerText = currentP.name + " (" + q + " ຊິ້ນ)";
+            document.getElementById('qr-img').src = currentP.qrs[q-1];
+        }
+    }
+
+    function sendWhatsApp() {
+        let q = document.getElementById('qty').value || 1;
+        let msg = `ຕິດຕໍ່ການສັ່ງຊື້: ${currentP.name} | ຈຳນວນ: ${q} ຊິ້ນ. ລາຄາ: ${(q*currentP.price).toLocaleString()} ₭. 🥰✅.`;
+        window.location.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+    }
+</script>
+</body>
+</html>
