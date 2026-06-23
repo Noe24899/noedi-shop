@@ -222,7 +222,13 @@ function updatePrice() {
     if (currentP.name === "YouTube" && q >= 3) {
         finalPrice = 100000; // ລາຄາທີ່ເຈົ້າກຳນົດເອງ
         hasDiscount = true;
-    }
+    } 
+    if (currentP.name === "RedM") {
+        if (q == 2) { finalPrice = 200000; hasDiscount = true; }
+        else if (q == 3) { finalPrice = 300000; hasDiscount = true; }
+        else if (q == 4) { finalPrice = 400000; hasDiscount = true; }
+        else if (q == 5) { finalPrice = 500000; hasDiscount = true; }
+    } 
     // ເພີ່ມເງື່ອນໄຂອື່ນໆຕໍ່ໄດ້ທີ່ນີ້...
     
     // ສະແດງຜົນ
