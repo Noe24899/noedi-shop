@@ -221,10 +221,10 @@ function updatePrice() {
 
     // 1. YouTube: ຫຼຸດສະເພາະ 3 ຊິ້ນ
     if (currentP.name === "YouTube") {
-        if (q == 3) {
-            finalPrice = 100000;
-            hasDiscount = true;
-        } else {
+        if (q == 3) { finalPrice = 100000; hasDiscount = true; } 
+        else if (q == 4) { finalPrice = 120000; hasDiscount = true; }
+        else if (q == 5) { finalPrice = 150000; hasDiscount = true; }
+        else {
             finalPrice = q * currentP.price;
             hasDiscount = false;
         }
