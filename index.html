@@ -103,8 +103,14 @@
     <img id="d-img" class="detail-product-img">
     <h2 id="d-name" style="margin-top:-10px;"></h2>
     <p id="d-desc"></p>
+  <p>ລາຄາລວມ: 
+    <span id="old-price" style="text-decoration: line-through; color: #888; font-size: 0.9rem; display: none;"></span> 
+    <b id="total-price" style="color: #00ff00; font-size: 1.2rem;"></b> ₭
+</p>
     <label>ເລືອກຈຳນວນ (1-5 ຊິ້ນ):</label>
-    <input type="number" id="qty" value="1" min="1" max="5" oninput="if(this.value>5)this.value=5; if(this.value<1 && this.value!='')this.value=1;">
+    <input type="number" id="qty" value="1" min="1" max="5" 
+oninput="if(this.value>5)this.value=5; if(this.value<1 && this.value!='')this.value=1; updatePrice();">
+
     <button class="btn" onclick="showPage('payment')">ຊຳລະເງິນ</button>
 </div>
 
@@ -117,7 +123,7 @@
     <input type="file" id="slip" accept="image/*">
     <button class="btn" onclick="sendWhatsApp()">ຢືນຢັນການຊື້ (ສົ່ງ WhatsApp)</button>
 </div>
-
+  
 <script>
     const WA = "8562098337156";
     const products = [
@@ -151,8 +157,13 @@
 
     let currentP = null;
     products.forEach((p, i) => {
-        document.getElementById('product-list').innerHTML += `<div class="card" onclick="openDetail(${i})"><img src="${p.img}"><div><b>${p.name}</b><br>${p.price} ₭</div></div>`;
+        document.getElementById('product-list').innerHTML += `
+        <div class="card" onclick="openDetail(${i})">
+            <img src="${p.img}">
+            <div><b>${p.name}</b><br>${p.price.toLocaleString()}₭</div>
+        </div>`;
     });
+
 
     function openDetail(i) {
         currentP = products[i];
@@ -178,6 +189,53 @@
         let msg = `ຕິດຕໍ່ການສັ່ງຊື້: ${currentP.name} | ຈຳນວນ: ${q} ຊິ້ນ. ລາຄາ: ${(q*currentP.price).toLocaleString()} ₭. 🥰✅.`;
         window.location.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
     }
+
+// ຟັງຊັນຄິດໄລ່ລາຄາອັດຕະໂນມັດ
+function updatePrice() {
+    let q = document.getElementById('qty').value || 1;
+    let total = q * currentP.price;
+    document.getElementById('total-price').innerText = total.toLocaleString();
+}
+
+      function openDetail(i) {
+        currentP = products[i];
+        document.getElementById('d-img').src = currentP.img;
+        document.getElementById('d-name').innerText = currentP.name;
+        document.getElementById('d-desc').innerText = currentP.desc;
+        
+        // --- ເພີ່ມ 2 ແຖວນີ້ໃສ່ບ່ອນນີ້ ---
+        document.getElementById('qty').value = 1; 
+        updatePrice(); 
+        // -----------------------------
+        
+        showPage('detail');
+    }
+
+function updatePrice() {
+    let q = parseInt(document.getElementById('qty').value) || 1;
+    let basePrice = q * currentP.price;
+    let finalPrice = basePrice;
+    let hasDiscount = false;
+
+    // --- ກົດລະບຽບສ່ວນຫຼຸດ (ເພີ່ມເງື່ອນໄຂໃສ່ບ່ອນນີ້) ---
+    // ຕົວຢ່າງ: ຖ້າຊື້ສິນຄ້າຊື່ "YouTube" ແລະ ຊື້ 3 ຊິ້ນຂຶ້ນໄປ
+    if (currentP.name === "YouTube" && q >= 3) {
+        finalPrice = 100000; // ລາຄາທີ່ເຈົ້າກຳນົດເອງ
+        hasDiscount = true;
+    }
+    // ເພີ່ມເງື່ອນໄຂອື່ນໆຕໍ່ໄດ້ທີ່ນີ້...
+    
+    // ສະແດງຜົນ
+    if (hasDiscount) {
+        document.getElementById('old-price').innerText = basePrice.toLocaleString();
+        document.getElementById('old-price').style.display = 'inline';
+    } else {
+        document.getElementById('old-price').style.display = 'none';
+    }
+    document.getElementById('total-price').innerText = finalPrice.toLocaleString();
+}
+
+  
 </script>
 </body>
 </html>
