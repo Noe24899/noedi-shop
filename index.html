@@ -69,6 +69,14 @@
     margin-bottom:5px;
 }
 
+      /* ສ່ວນເພີ່ມ: ຈັດຮູບ QR ໃຫ້ໄວ ແລະ ສວຍງາມ */
+        #qr-img {
+            width: 60px; height: 300px;
+            object-fit: contain; background: #fff;
+            display: block; margin: 15px auto;
+            border: 3px solid #00ff00; border-radius: 10px;
+                }
+      
 </style>
 </head>
 <body>
@@ -77,7 +85,7 @@
     <div class="logo-box">
         <img src="<a href="< href="https://freeimage.host/i/Cxe0aQ1"><img src="https://iili.io/Cxe0aQ1.md.webp" alt="Cxe0aQ1.md.webp">
         <div class="fb-overlay">
-            <a href="https://www.facebook.com/share/1HEHm31337/">FB: Noedi Sulivong</a>
+            <a href="https://www.facebook.com/share/1ມHEHm31337/">FB: Noedi Sulivong</a>
         </div>
     </div>
 </div>
@@ -130,6 +138,16 @@
         {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສີນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]},
         {name:"ສິນຄ້າວ່າງ", price:000, img:"https://iili.io/CxeM8VS.md.webp", desc:"ສິນຄ້າວ່າງ", qrs:["QR1.jpg","QR2.jpg","QR3.jpg","QR4.jpg","QR5.jpg"]}
     ];
+
+  // [ລະບົບເພີ່ມເຕີມ]: ໂຫຼດຮູບ QR ລ່ວງໜ້າ (Preloading) ເພື່ອໃຫ້ມັນໄວທັນໃຈ
+    window.onload = function() {
+        products.forEach(p => {
+            p.qrs.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        });
+    };
 
     let currentP = null;
     products.forEach((p, i) => {
