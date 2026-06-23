@@ -217,30 +217,43 @@ function updatePrice() {
     let finalPrice = basePrice;
     let hasDiscount = false;
 
-    // --- ກົດລະບຽບສ່ວນຫຼຸດ (ເພີ່ມເງື່ອນໄຂໃສ່ບ່ອນນີ້) ---
-    // ຕົວຢ່າງ: ຖ້າຊື້ສິນຄ້າຊື່ "YouTube" ແລະ ຊື້ 3 ຊິ້ນຂຶ້ນໄປ
-    if (currentP.name === "YouTube" && q >= 3) {
-        finalPrice = 100000; // ລາຄາທີ່ເຈົ້າກຳນົດເອງ
-        hasDiscount = true;
+    // --- ເງື່ອນໄຂສ່ວນຫຼຸດສະເພາະສິນຄ້າ ---
+
+    // 1. YouTube: ຫຼຸດສະເພາະ 3 ຊິ້ນ
+    if (currentP.name === "YouTube") {
+        if (q == 3) {
+            finalPrice = 100000;
+            hasDiscount = true;
+        } else {
+            finalPrice = q * currentP.price;
+            hasDiscount = false;
+        }
     } 
-    if (currentP.name === "RedM") {
+    // 2. RedM: ຫຼຸດຕາມຈຳນວນທີ່ກຳນົດ
+    else if (currentP.name === "RedM") {
         if (q == 2) { finalPrice = 200000; hasDiscount = true; }
         else if (q == 3) { finalPrice = 300000; hasDiscount = true; }
         else if (q == 4) { finalPrice = 400000; hasDiscount = true; }
         else if (q == 5) { finalPrice = 500000; hasDiscount = true; }
-    } 
-    // ເພີ່ມເງື່ອນໄຂອື່ນໆຕໍ່ໄດ້ທີ່ນີ້...
-    
-    // ສະແດງຜົນ
+        else {
+            finalPrice = q * currentP.price;
+            hasDiscount = false;
+        }
+    }
+    // 3. ເພີ່ມສິນຄ້າໂຕຕໍ່ໄປກໍໃຊ້ else if ແບບນີ້ໄປເລື້ອຍໆ...
+    else if (currentP.name === "ຊື່ສິນຄ້າອື່ນ") {
+        // ເພີ່ມເງື່ອນໄຂຢູ່ບ່ອນນີ້
+    }
+
+    // --- ສະແດງຜົນ (ຫ້າມແກ້ໄຂສ່ວນນີ້) ---
     if (hasDiscount) {
-        document.getElementById('old-price').innerText = basePrice.toLocaleString();
+        document.getElementById('old-price').innerText = basePrice.toLocaleString() + "₭";
         document.getElementById('old-price').style.display = 'inline';
     } else {
         document.getElementById('old-price').style.display = 'none';
     }
     document.getElementById('total-price').innerText = finalPrice.toLocaleString();
 }
-
   
 </script>
 </body>
