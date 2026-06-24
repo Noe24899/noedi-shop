@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noedi Shop Official</title>
+    <title>Noedi Shop</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00A0AA; --bg: #0b0e14; }
@@ -240,6 +240,15 @@ function updatePrice() {
             hasDiscount = false;
         }
     }
+      else if (currentP.name === "Windows 10/11") {
+        if (q == 3) { finalPrice = 100000; hasDiscount = true; }
+        else if (q == 4) { finalPrice = 150000; hasDiscount = true; }
+        else if (q == 5) { finalPrice = 150000; hasDiscount = true; }
+        else {
+            finalPrice = q * currentP.price;
+            hasDiscount = false;
+        }
+      }
     // 3. ເພີ່ມສິນຄ້າໂຕຕໍ່ໄປກໍໃຊ້ else if ແບບນີ້ໄປເລື້ອຍໆ...
     else if (currentP.name === "ຊື່ສິນຄ້າອື່ນ") {
         // ເພີ່ມເງື່ອນໄຂຢູ່ບ່ອນນີ້
