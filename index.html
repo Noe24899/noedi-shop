@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noedi Shop</title>
+    <title>Noedi Shop Official</title>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #00A0AA; --bg: #0b0e14; }
@@ -108,9 +108,12 @@
     <b id="total-price" style="color: #00ff00; font-size: 1.2rem;"></b> ₭
 </p>
     <label>ເລືອກຈຳນວນ (1-5 ຊິ້ນ):</label>
-    <input type="number" id="qty" value="1" min="1" max="5" 
-oninput="if(this.value>5)this.value=5; if(this.value<1 && this.value!='')this.value=1; updatePrice();">
-
+<div style="display: flex; align-items: center; gap: 5px; margin-top: 5px;">
+    <button class="back-btn" style="margin:0;" onclick="changeQty(-1)">-</button>
+    <input type="number" id="qty" value="1" min="1" max="5" readonly 
+           style="width: 50px; text-align: center;">
+    <button class="back-btn" style="margin:0;" onclick="changeQty(1)">+</button>
+</div>
     <button class="btn" onclick="showPage('payment')">ຊຳລະເງິນ</button>
 </div>
 
@@ -211,6 +214,18 @@ function updatePrice() {
         showPage('detail');
     }
 
+function changeQty(val) {
+    let input = document.getElementById('qty');
+    let newVal = parseInt(input.value) + val;
+    
+    // ກວດສອບບໍ່ໃຫ້ຫຼຸດ 1 ຫຼື ເກີນ 5
+    if (newVal >= 1 && newVal <= 5) {
+        input.value = newVal;
+        updatePrice(); // ອັບເດດລາຄາທັນທີເມື່ອກົດ
+    }
+}
+
+  
 function updatePrice() {
     let q = parseInt(document.getElementById('qty').value) || 1;
     let basePrice = q * currentP.price;
