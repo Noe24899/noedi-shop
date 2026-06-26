@@ -76,6 +76,31 @@
             display: block; margin: 15px auto;
             border: 3px solid #00ff00; border-radius: 10px;
                 }
+
+/* ໂທນມືດ (ຄ່າເລີ່ມຕົ້ນ) */
+:root { 
+    --bg: #0b0e14; 
+    --text: #fff; 
+    --card-bg: #1c222d; 
+    --primary: #00A0AA; 
+}
+
+/* ໂທນແຈ້ງ (ເມື່ອປ່ຽນເປັນ Light Mode) */
+body.light-mode {
+    --bg: #f4f4f4;
+    --text: #000;
+    --card-bg: #ffffff;
+    --primary: #008891;
+}
+
+body { 
+    background-color: var(--bg); 
+    color: var(--text); 
+    transition: 0.3s; /* ເຮັດໃຫ້ການປ່ຽນສີລື່ນໄຫຼ */
+}
+
+.card { background: var(--card-bg) !important; color: var(--text); }
+
       
 </style>
 </head>
@@ -126,7 +151,11 @@
     <input type="file" id="slip" accept="image/*">
     <button class="btn" onclick="sendWhatsApp()">ຢືນຢັນການຊື້ (ສົ່ງ WhatsApp)</button>
 </div>
-  
+  <button id="theme-toggle" onclick="toggleTheme()" 
+        style="position: fixed; top: 20px; right: 20px; font-size: 1.5rem; background: none; border: none; cursor: pointer; z-index: 999;">
+   🌜
+</button>
+
 <script>
     const WA = "8562098337156";
     const products = [
@@ -222,6 +251,20 @@ function changeQty(val) {
     if (newVal >= 1 && newVal <= 5) {
         input.value = newVal;
         updatePrice(); // ອັບເດດລາຄາທັນທີເມື່ອກົດ
+    }
+}
+
+  function toggleTheme() {
+    const body = document.body;
+    const btn = document.getElementById('theme-toggle');
+    
+    body.classList.toggle('light-mode');
+    
+    // ປ່ຽນໄອຄອນ
+    if (body.classList.contains('light-mode')) {
+        btn.innerText = '🌥️';
+    } else {
+        btn.innerText = '🌜';
     }
 }
 
